@@ -1,0 +1,17 @@
+{
+  "name": "parse-input",
+  "author": "nivandres",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
