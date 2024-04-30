@@ -28,3 +28,4 @@ timestamp(3456) // 3s456ms
 timestamp(1000000) // 16m40s
 timestamp(31556736000) // 1y
 ```
+# parse-input
