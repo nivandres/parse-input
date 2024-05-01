@@ -2,11 +2,12 @@ type Option = string | number;
 
 const defaultOptions = new Array(11).fill(0).map((_, i) => i);
 
-export function option<T extends readonly Option[] | Option[]>(
+export function getOption<T extends readonly Option[] | Option[]>(
   input?: string | number,
   options: T = defaultOptions as unknown as T
 ): T[number] | undefined {
-  input = ` ${input} `.replace(/[^0-9\w\pL]{0,}\s+[^0-9\w\pL]{0,}/gm, "  ");
+  if (typeof options === "string") return getOption(input, [options]);
+  input = ` ${input} `.replace(/[^0-9\w\pL]*\s+[^0-9\w\pL]*/gm, "  ");
   let option = [...options];
   option = option.sort(
     (a, b) => b.toString().length - a.toString().length
@@ -22,10 +23,12 @@ export function option<T extends readonly Option[] | Option[]>(
     )[0]
     .trim();
   input = option.find((o) =>
-    o == input || o.toString().match(new RegExp(`[^0-9\w\pL]{0,}${input}[^0-9\w\pL]{0,}`, "gi")) ? o : false
+    o == input || o.toString().match(new RegExp(`[^0-9\\w\\pL]*${input}[^0-9\\w\\pL]*`, "gi")) ? o : false
   );
   return input as T[number];
 }
 
-export const select = option;
-export const options = option;
+export const select = getOption;
+export const option = getOption;
+export const options = getOption;
+
